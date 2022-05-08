@@ -1,6 +1,11 @@
 # Udagram
 
-This application is provided to you as an alternative starter project if you do not wish to host your own code done in the previous courses of this nanodegree. The udagram application is a fairly simple application that includes all the major components of a Full-Stack web application.
+Full-stack udacity starter deployment project.
+
+<p align="center">
+  <a href="http://89789random.s3-website.eu-west-3.amazonaws.com/">Frontend</a> -
+  <a href="http://udagram-env.eba-zkk9mdkc.eu-west-3.elasticbeanstalk.com/">Backend</a>
+</p>
 
 ## Getting Started
 

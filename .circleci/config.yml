@@ -1,42 +1,43 @@
+# CircleCI configuration
 version: 2.1
 orbs:
-  node: circleci/node@5.0.2
-  aws-cli: circleci/aws-cli@3.1.1
-  eb: circleci/aws-elastic-beanstalk@2.0.1
+  node: circleci/node@5.0.2 # Setup node
+  aws-cli: circleci/aws-cli@3.1.1 # Setup AWS CLI
+  eb: circleci/aws-elastic-beanstalk@2.0.1 # Setup EB CLI
 jobs:
   build:
     docker:
       - image: 'cimg/base:stable'
     steps:
-      - node/install
-      - checkout
-      - aws-cli/setup
-      - eb/setup
-      - run:
+      - node/install # Install node
+      - checkout # Checks out the source code
+      - aws-cli/setup # Install AWS CLI
+      - eb/setup # Install EB CLI
+      - run: # Install backend dependencies
           name: Back-End Install
           command: |
             npm run backend:install
-      - run:
+      - run: # Build backend with making an archive of the files
           name: Back-End Build
           command: |
             npm run backend:build
-      - run:
+      - run: # Deploy backend to Elastic Beanstalk
           name: Deploy Back-End
           command: |
             npm run backend:deploy
-      - run:
+      - run: # Install frontend dependencies
           name: Front-End Install
           command: |
             npm run frontend:install
-      - run:
+      - run: # Build frontend
           name: Front-End Build
           command: |
             npm run frontend:build
-      - run:
+      - run: # Deploy frontend to an S3 bucket
           name: Deploy Front-End
           command: |
             npm run frontend:deploy
-workflows:
+workflows: # Only trigger if pushed to main branch
   build:
     jobs:
       - build:
